@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson — 2Carvn Academy</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <h1 id="lesson-title">Lesson</h1>
+      <a class="btn secondary" href="course-map.html">Back to Course Map</a>
+    </div>
+
+    <div class="card" id="content-card">
+      <h3>Learn</h3>
+      <p id="lesson-body" style="color: var(--color-muted); white-space: pre-line;">Loading...</p>
+
+      <h3>Mini Challenge</h3>
+      <p style="color: var(--color-muted);">Challenge module not built yet for this lesson type — placeholder.</p>
+
+      <button class="btn" id="complete-btn">Mark Complete (+10 XP)</button>
+    </div>
+
+    <div class="card" id="quiz-card" style="display:none;">
+      <h3>Quiz</h3>
+      <div id="quiz-container"></div>
+    </div>
+
+    <div class="card" id="dragdrop-card" style="display:none;">
+      <h3>Activity</h3>
+      <div id="dragdrop-container"></div>
+    </div>
+
+    <div class="card" id="code-card" style="display:none;">
+      <h3>Code Challenge</h3>
+      <div id="code-container"></div>
+    </div>
+
+    <p class="error" id="lesson-error"></p>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/quizEngine.js"></script>
+  <script src="../js/dragDropEngine.js"></script>
+  <script src="../js/codeEditor.js"></script>
+  <script src="../js/lesson.js"></script>
+</body>
+</html>

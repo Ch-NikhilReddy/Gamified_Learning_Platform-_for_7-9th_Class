@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Map — 2Carvn Academy</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <div>
+        <h1 id="student-name">Course Map</h1>
+        <span class="pill xp" id="xp-pill">0 XP</span>
+        <span id="streak-pill"></span>
+        <span id="cert-pills"></span>
+      </div>
+      <div>
+        <a class="btn secondary" href="code-playground.html">Free Practice</a>
+        <a class="btn secondary" href="../index.html">Switch Student</a>
+      </div>
+    </div>
+
+    <div class="card" id="badges-card" style="margin-bottom: 20px; display:none;">
+      <h3 style="margin-top:0;">Badges</h3>
+      <div id="badges-list" style="display:flex; flex-wrap:wrap; gap:10px;"></div>
+    </div>
+
+    <div class="card" id="leaderboard-card" style="margin-bottom: 20px; display:none;">
+      <h3 style="margin-top:0;">Leaderboard (your section)</h3>
+      <ol id="leaderboard-list" style="margin:0; padding-left:20px;"></ol>
+    </div>
+
+    <div id="course-container">Loading...</div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/course-map.js"></script>
+</body>
+</html>

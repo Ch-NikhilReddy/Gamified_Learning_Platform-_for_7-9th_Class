@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell -NoProfile -Command 'Get-Process node -ErrorAction SilentlyContinue | Where-Object {$_.Path -like '\\\\''*'\\\\''} | Stop-Process -Force')",
+      "Bash(curl -s -X POST http://localhost:3000/api/students/login -H \"Content-Type: application/json\" -d '{\"name\":\"Quiz Tester\",\"className\":\"Class 7\",\"sectionName\":\"A\"}')"
+    ]
+  }
+}

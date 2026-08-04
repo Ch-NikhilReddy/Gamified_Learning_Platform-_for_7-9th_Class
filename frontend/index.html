@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2Carvn Academy</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <h1>2Carvn Academy</h1>
+      <a class="btn secondary" href="pages/teacher-dashboard.html">Teacher Login</a>
+    </div>
+
+    <div class="card" style="max-width: 420px; margin: 0 auto;">
+      <h2>Student Login</h2>
+      <p style="color: var(--color-muted); margin-top: -8px;">Enter your name, class and section to continue.</p>
+      <form id="login-form">
+        <input class="input" type="text" id="name" placeholder="Your name" required />
+        <input class="input" type="text" id="className" placeholder="Class (e.g. Class 7)" required />
+        <input class="input" type="text" id="sectionName" placeholder="Section (e.g. A)" required />
+        <button class="btn" type="submit" style="width: 100%;">Start Learning</button>
+      </form>
+      <p class="error" id="login-error"></p>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "2carvn-academy-backend",
+  "version": "1.0.0",
+  "description": "2Carvn Academy - Express API + JSON data store",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

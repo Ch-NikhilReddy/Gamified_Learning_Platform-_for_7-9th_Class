@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Practice — 2Carvn Academy</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <h1>Free Practice</h1>
+      <a class="btn secondary" href="course-map.html">Back to Course Map</a>
+    </div>
+
+    <p style="color: var(--color-muted);">
+      A scratchpad for experimenting beyond the lessons — HTML, CSS, and JavaScript, with a live preview.
+      Type "&lt;" for tag suggestions, or start a CSS line for property suggestions. Your work autosaves in this browser.
+    </p>
+
+    <div class="card">
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div style="flex:1; min-width:260px;">
+          <label style="display:block; font-weight:700; margin-bottom:6px;">HTML</label>
+          <textarea id="playground-html" class="input" style="height:220px; font-family:monospace; margin-bottom:0;"></textarea>
+        </div>
+        <div style="flex:1; min-width:260px;">
+          <label style="display:block; font-weight:700; margin-bottom:6px;">CSS</label>
+          <textarea id="playground-css" class="input" style="height:220px; font-family:monospace; margin-bottom:0;"></textarea>
+        </div>
+        <div style="flex:1; min-width:260px;">
+          <label style="display:block; font-weight:700; margin-bottom:6px;">JavaScript</label>
+          <textarea id="playground-js" class="input" style="height:220px; font-family:monospace; margin-bottom:0;"></textarea>
+        </div>
+      </div>
+
+      <label style="display:block; font-weight:700; margin: 16px 0 6px;">Preview</label>
+      <iframe id="playground-preview" style="width:100%; height:260px; border:1px solid var(--color-border); border-radius:8px; background:#fff;"></iframe>
+
+      <button class="btn secondary" id="playground-reset" style="margin-top:16px;">Reset to Example</button>
+    </div>
+  </div>
+
+  <script src="../js/code-playground.js"></script>
+</body>
+</html>

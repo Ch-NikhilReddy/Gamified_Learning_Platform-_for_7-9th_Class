@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard — 2Carvn Academy</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <h1>Teacher Dashboard</h1>
+      <a class="btn secondary" href="../index.html">Student Login</a>
+    </div>
+
+    <div class="card" id="login-card" style="max-width: 360px;">
+      <h2>Teacher Login</h2>
+      <input class="input" type="text" id="teacher-name" placeholder="Your name (e.g. Admin)" />
+      <button class="btn" id="teacher-login-btn" style="width: 100%;">Login</button>
+      <p class="error" id="teacher-login-error"></p>
+    </div>
+
+    <div id="dashboard" style="display:none;">
+      <div class="card" style="margin-bottom: 24px;">
+        <h2>Sections — Weekly Pacing</h2>
+        <p class="error" id="teacher-action-error"></p>
+        <div id="sections-list"></div>
+      </div>
+
+      <div class="card" style="margin-bottom: 24px;">
+        <h2>Live Roster</h2>
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Section</th><th>XP</th><th>Streak</th><th>Badges</th><th>Certifications</th><th>Grade</th></tr>
+          </thead>
+          <tbody id="roster-body"></tbody>
+        </table>
+      </div>
+
+      <div class="card" style="margin-bottom: 24px;">
+        <h2>Module Publishing</h2>
+        <p style="color: var(--color-muted);">Unit 1 modules are always published and not shown here.</p>
+        <table>
+          <thead><tr><th>Unit</th><th>Lesson</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="modules-body"></tbody>
+        </table>
+      </div>
+
+      <div class="card" style="margin-bottom: 24px;">
+        <h2>Quiz Editor</h2>
+        <table>
+          <thead><tr><th>Unit</th><th>Lesson</th><th>Questions</th><th>Action</th></tr></thead>
+          <tbody id="quizzes-body"></tbody>
+        </table>
+        <div id="quiz-editor" style="display:none; margin-top: 20px; border-top: 1px solid var(--color-border); padding-top: 20px;"></div>
+      </div>
+
+      <div class="card" style="margin-bottom: 24px;">
+        <h2>Drag-and-Drop Editor</h2>
+        <table>
+          <thead><tr><th>Unit</th><th>Lesson</th><th>Mode</th><th>Items</th><th>Action</th></tr></thead>
+          <tbody id="dragdrops-body"></tbody>
+        </table>
+        <div id="dragdrop-editor" style="display:none; margin-top: 20px; border-top: 1px solid var(--color-border); padding-top: 20px;"></div>
+      </div>
+
+      <div class="card" style="margin-bottom: 24px;">
+        <h2>Code Challenge Editor</h2>
+        <table>
+          <thead><tr><th>Unit</th><th>Lesson</th><th>Checks</th><th>Action</th></tr></thead>
+          <tbody id="code-challenges-body"></tbody>
+        </table>
+        <div id="code-challenge-editor" style="display:none; margin-top: 20px; border-top: 1px solid var(--color-border); padding-top: 20px;"></div>
+      </div>
+
+      <div class="card">
+        <h2>Lesson Content Editor</h2>
+        <p style="color: var(--color-muted);">Plain "Learn" text for lessons that aren't a quiz, activity, or code challenge.</p>
+        <table>
+          <thead><tr><th>Unit</th><th>Lesson</th><th>Written?</th><th>Action</th></tr></thead>
+          <tbody id="content-lessons-body"></tbody>
+        </table>
+        <div id="content-editor" style="display:none; margin-top: 20px; border-top: 1px solid var(--color-border); padding-top: 20px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/quiz-editor.js"></script>
+  <script src="../js/dragdrop-editor.js"></script>
+  <script src="../js/code-challenge-editor.js"></script>
+  <script src="../js/content-editor.js"></script>
+  <script src="../js/teacher-dashboard.js"></script>
+</body>
+</html>
