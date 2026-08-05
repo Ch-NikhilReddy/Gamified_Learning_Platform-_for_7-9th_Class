@@ -210,21 +210,54 @@ router.get("/teacher/roster", (req, res) => {
   res.json({ sections, roster });
 });
 
-// PUT /api/teacher/sections/:id/week { currentWeek }
-router.put("/teacher/sections/:id/week", (req, res) => {
-  const { currentWeek } = req.body || {};
+// POST /api/teacher/sections { teacherId, className, sectionName, currentWeek }
+router.post("/teacher/sections", (req, res) => {
+  const { teacherId, className, sectionName, currentWeek = 1 } = req.body || {};
+  if (!teacherId || !className || !sectionName) {
+    return res.status(400).json({ error: "teacherId, className and sectionName are required" });
+  }
+
+  const trimmedClass = String(className).trim();
+  const trimmedSection = String(sectionName).trim();
+  if (!trimmedClass || !trimmedSection) {
+    return res.status(400).json({ error: "className and sectionName cannot be empty" });
+  }
   if (!Number.isInteger(currentWeek) || currentWeek < 1) {
     return res.status(400).json({ error: "currentWeek must be a positive integer" });
   }
+
   const data = load();
-  const section = data.sections.find((s) => s.id === req.params.id);
-  if (!section) return res.status(404).json({ error: "Section not found" });
-  section.currentWeek = currentWeek;
+  const teacher = data.teachers.find((t) => t.id === teacherId);
+  if (!teacher) return res.status(404).json({ error: "Teacher not found" });
+
+  const existing = data.sections.find(
+    (s) => s.className.toLowerCase() === trimmedClass.toLowerCase() &&
+           s.sectionName.toLowerCase() === trimmedSection.toLowerCase()
+  );
+  if (existing) {
+    return res.status(409).json({ error: "This class and section already exist" });
+  }
+
+  let sectionId = `sec-${trimmedClass.replace(/[^a-zA-Z0-9]+/g, "-").toLowerCase()}-${trimmedSection.replace(/[^a-zA-Z0-9]+/g, "-").toLowerCase()}`;
+  sectionId = sectionId.replace(/-+/g, "-").replace(/(^-|-$)/g, "");
+  while (data.sections.some((s) => s.id === sectionId)) {
+    sectionId = `${sectionId}-${Math.random().toString(36).slice(2, 5)}`;
+  }
+
+  const section = {
+    id: sectionId,
+    className: trimmedClass,
+    sectionName: trimmedSection,
+    currentWeek,
+  };
+  data.sections.push(section);
+  teacher.sections.push(section.id);
   save(data);
-  res.json({ section });
+
+  res.status(201).json({ section });
 });
 
-// PUT /api/teacher/modules/:id { status } — status: "draft" | "published"
+// PUT /api/teacher/sections/:id/week { currentWeek }
 // Unit 1 modules ignore this (always published) per unlock.js.
 router.put("/teacher/modules/:id", (req, res) => {
   const { status } = req.body || {};

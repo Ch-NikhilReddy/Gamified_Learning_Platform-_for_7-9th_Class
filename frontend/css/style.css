@@ -119,3 +119,4 @@ th { color: var(--color-muted); font-size: 0.85rem; text-transform: uppercase; }
 }
 
 .error { color: #d64545; font-size: 0.9rem; }
+.success { color: var(--color-success); font-size: 0.9rem; }

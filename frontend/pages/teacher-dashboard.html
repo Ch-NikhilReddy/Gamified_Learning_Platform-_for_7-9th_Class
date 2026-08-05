@@ -24,6 +24,13 @@
       <div class="card" style="margin-bottom: 24px;">
         <h2>Sections — Weekly Pacing</h2>
         <p class="error" id="teacher-action-error"></p>
+        <p class="success" id="teacher-success"></p>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end; margin-bottom:16px;">
+          <input class="input" type="text" id="new-class-name" placeholder="Class name (e.g. Class 7)" style="flex:1; min-width:180px;" />
+          <input class="input" type="text" id="new-section-name" placeholder="Section name (e.g. C)" style="width:160px;" />
+          <input class="input" type="number" id="new-section-week" min="1" value="1" style="width:90px;" />
+          <button class="btn" id="add-section-btn" style="white-space:nowrap;">Add Section</button>
+        </div>
         <div id="sections-list"></div>
       </div>
 

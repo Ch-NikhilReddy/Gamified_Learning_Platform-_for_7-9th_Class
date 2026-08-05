@@ -2,6 +2,16 @@ let teacherId = localStorage.getItem("teacherId");
 
 function showTeacherError(message = "") {
   document.getElementById("teacher-action-error").textContent = message;
+  if (message) {
+    document.getElementById("teacher-success").textContent = "";
+  }
+}
+
+function showTeacherSuccess(message = "") {
+  document.getElementById("teacher-success").textContent = message;
+  if (message) {
+    document.getElementById("teacher-action-error").textContent = "";
+  }
 }
 
 function showDashboard() {
@@ -16,6 +26,7 @@ document.getElementById("teacher-login-btn").addEventListener("click", async () 
     teacherId = teacher.id;
     localStorage.setItem("teacherId", teacherId);
     showDashboard();
+    document.getElementById("add-section-btn").addEventListener("click", addSection);
     showTeacherError("");
     loadRoster();
     loadModules();
@@ -27,6 +38,28 @@ document.getElementById("teacher-login-btn").addEventListener("click", async () 
     document.getElementById("teacher-login-error").textContent = err.message;
   }
 });
+
+async function addSection() {
+  const className = document.getElementById("new-class-name").value.trim();
+  const sectionName = document.getElementById("new-section-name").value.trim();
+  const currentWeek = parseInt(document.getElementById("new-section-week").value, 10);
+  showTeacherError("");
+
+  if (!className || !sectionName) {
+    return showTeacherError("Class name and section name are required.");
+  }
+
+  try {
+    await apiPost("/teacher/sections", { teacherId, className, sectionName, currentWeek });
+    document.getElementById("new-class-name").value = "";
+    document.getElementById("new-section-name").value = "";
+    document.getElementById("new-section-week").value = "1";
+    showTeacherSuccess("Section added successfully.");
+    loadRoster();
+  } catch (err) {
+    showTeacherError(err.message);
+  }
+}
 
 async function loadRoster() {
   const { sections, roster } = await apiGet(`/teacher/roster?teacherId=${teacherId}`);
@@ -250,6 +283,7 @@ async function loadContentLessons() {
 
 if (teacherId) {
   showDashboard();
+  document.getElementById("add-section-btn").addEventListener("click", addSection);
   loadRoster();
   loadModules();
   loadQuizzes();
