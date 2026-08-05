@@ -25,11 +25,16 @@ async function api(path, options = {}) {
 api.get = (path) => api(path);
 api.post = (path, body) => api(path, { method: "POST", body });
 api.put = (path, body) => api(path, { method: "PUT", body });
+api.delete = (path, body) => api(path, { method: "DELETE", body });
 
 window.api = api;
 
 async function apiGet(path) {
   return api.get(path);
+}
+
+async function apiDelete(path, body) {
+  return api.delete(path, body);
 }
 
 async function apiPost(path, body) {

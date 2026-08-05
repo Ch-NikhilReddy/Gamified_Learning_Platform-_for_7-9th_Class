@@ -257,6 +257,38 @@ router.post("/teacher/sections", (req, res) => {
   res.status(201).json({ section });
 });
 
+// DELETE /api/teacher/sections/:id?teacherId=...
+router.delete("/teacher/sections/:id", (req, res) => {
+  const { teacherId } = req.query || {};
+  const sectionId = req.params.id;
+  if (!teacherId) {
+    return res.status(400).json({ error: "teacherId is required" });
+  }
+
+  const data = load();
+  const teacher = data.teachers.find((t) => t.id === teacherId);
+  if (!teacher) return res.status(404).json({ error: "Teacher not found" });
+  if (!teacher.sections.includes(sectionId)) {
+    return res.status(403).json({ error: "You do not have permission to delete this section" });
+  }
+
+  const sectionIndex = data.sections.findIndex((s) => s.id === sectionId);
+  if (sectionIndex === -1) {
+    return res.status(404).json({ error: "Section not found" });
+  }
+
+  data.sections.splice(sectionIndex, 1);
+  teacher.sections = teacher.sections.filter((id) => id !== sectionId);
+  for (const student of data.students) {
+    if (student.sectionId === sectionId) {
+      student.sectionId = null;
+    }
+  }
+
+  save(data);
+  res.json({ success: true });
+});
+
 // PUT /api/teacher/sections/:id/week { currentWeek }
 // Unit 1 modules ignore this (always published) per unlock.js.
 router.put("/teacher/modules/:id", (req, res) => {

@@ -61,6 +61,17 @@ async function addSection() {
   }
 }
 
+async function deleteSection(sectionId) {
+  showTeacherError("");
+  try {
+    await apiDelete(`/teacher/sections/${sectionId}?teacherId=${teacherId}`);
+    showTeacherSuccess("Section deleted successfully.");
+    loadRoster();
+  } catch (err) {
+    showTeacherError(err.message);
+  }
+}
+
 async function loadRoster() {
   const { sections, roster } = await apiGet(`/teacher/roster?teacherId=${teacherId}`);
 
@@ -73,6 +84,8 @@ async function loadRoster() {
       <strong>${section.className} - ${section.sectionName}</strong>
       &nbsp; Current Week:
       <input type="number" min="1" value="${section.currentWeek}" style="width:60px" data-section-id="${section.id}" class="week-input" />
+      &nbsp;
+      <button class="btn secondary" data-delete-id="${section.id}" style="margin-left:10px;">Delete</button>
     `;
     sectionsList.appendChild(row);
   });
@@ -88,6 +101,14 @@ async function loadRoster() {
       } catch (err) {
         showTeacherError(err.message);
       }
+    });
+  });
+
+  sectionsList.querySelectorAll("button[data-delete-id]").forEach((button) => {
+    button.addEventListener("click", async (e) => {
+      const sectionId = e.target.getAttribute("data-delete-id");
+      if (!confirm("Delete this section? This cannot be undone.")) return;
+      await deleteSection(sectionId);
     });
   });
 
